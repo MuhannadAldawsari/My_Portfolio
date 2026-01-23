@@ -1,5 +1,5 @@
-import { X } from "lucide-react";
-import { ReactNode, useEffect } from "react";
+import { Moon, Sun } from "lucide-react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface SectionOverlayProps {
   isOpen: boolean;
@@ -9,15 +9,41 @@ interface SectionOverlayProps {
 }
 
 export const SectionOverlay = ({ isOpen, onClose, title, children }: SectionOverlayProps) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check theme on mount
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isOpen]); // Re-check when opened
+
+  const toggleDarkMode = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    if (newIsDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    
+
     if (isOpen) {
       window.addEventListener("keydown", handleEscape);
     }
-    
+
     return () => window.removeEventListener("keydown", handleEscape);
   }, [isOpen, onClose]);
 
@@ -32,13 +58,14 @@ export const SectionOverlay = ({ isOpen, onClose, title, children }: SectionOver
             {title}
           </h2>
           <button
-            onClick={onClose}
+            onClick={toggleDarkMode}
             className="p-2 rounded-full hover:bg-secondary transition-colors"
+            aria-label="Toggle dark mode"
           >
-            <X className="w-5 h-5 text-muted-foreground" />
+            {isDark ? <Sun className="w-5 h-5 text-muted-foreground" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
           </button>
         </div>
-        
+
         {/* Scrollable Content */}
         <div className="panel-scroll">
           {children}

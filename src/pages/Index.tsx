@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { GameNav } from "@/components/GameNav";
-import { TopNavbar } from "@/components/TopNavbar";
+import { GameNav } from "@/components/MainNavbar";
+
 import { HomeScreen } from "@/components/HomeScreen";
 import { SectionOverlay } from "@/components/SectionOverlay";
 import { AboutSection } from "@/components/sections/AboutSection";
@@ -11,16 +11,6 @@ type NavSection = "home" | "about" | "projects" | "contact";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState<NavSection>("home");
-  const [isArabic, setIsArabic] = useState(() => {
-    const saved = localStorage.getItem("language");
-    return saved === "ar";
-  });
-
-  useEffect(() => {
-    document.documentElement.dir = isArabic ? "rtl" : "ltr";
-    document.documentElement.lang = isArabic ? "ar" : "en";
-    localStorage.setItem("language", isArabic ? "ar" : "en");
-  }, [isArabic]);
 
   const handleNavigate = (section: NavSection) => {
     setActiveSection(section);
@@ -30,44 +20,43 @@ const Index = () => {
     setActiveSection("home");
   };
 
-  const toggleLanguage = () => {
-    setIsArabic(!isArabic);
-  };
-
   return (
     <div className="fixed inset-0 bg-background subtle-pattern overflow-hidden">
-      {/* Top Navigation */}
-      <TopNavbar isArabic={isArabic} onToggleLanguage={toggleLanguage} />
-
       {/* Page Navigation - Bottom */}
-      <GameNav activeSection={activeSection} onNavigate={handleNavigate} isArabic={isArabic} />
+      <GameNav activeSection={activeSection} onNavigate={handleNavigate} />
 
-      {/* Home Screen */}
-      <HomeScreen isArabic={isArabic} />
+      {/* Home Section */}
+      <SectionOverlay
+        isOpen={activeSection === "home"}
+        onClose={closeOverlay}
+        title="Welcome"
+      >
+        <HomeScreen />
+      </SectionOverlay>
 
-      {/* Section Overlays */}
+      {/* Other Section Overlays */}
       <SectionOverlay
         isOpen={activeSection === "about"}
         onClose={closeOverlay}
-        title={isArabic ? "نبذة عني والشهادات" : "About & Certifications"}
+        title="About & Certifications"
       >
-        <AboutSection isArabic={isArabic} />
+        <AboutSection />
       </SectionOverlay>
 
       <SectionOverlay
         isOpen={activeSection === "projects"}
         onClose={closeOverlay}
-        title={isArabic ? "المشاريع" : "Projects"}
+        title="Projects"
       >
-        <ProjectsSection isArabic={isArabic} />
+        <ProjectsSection />
       </SectionOverlay>
 
       <SectionOverlay
         isOpen={activeSection === "contact"}
         onClose={closeOverlay}
-        title={isArabic ? "تواصل معي" : "Get in Touch"}
+        title="Get in Touch"
       >
-        <ContactSection isArabic={isArabic} />
+        <ContactSection />
       </SectionOverlay>
     </div>
   );

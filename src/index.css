@@ -96,7 +96,9 @@
     font-family: 'Inter', 'Noto Sans Arabic', sans-serif;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: 'Playfair Display', 'Noto Sans Arabic', serif;
   }
 
@@ -104,7 +106,9 @@
     font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
   }
 
-  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3 {
     font-family: 'Noto Sans Arabic', 'Playfair Display', serif;
   }
 }
@@ -141,8 +145,8 @@
 
   .overlay-panel {
     @apply fixed z-50 flex items-center justify-center;
-    top: 3.5rem;
-    bottom: 5rem;
+    top: 2rem;
+    bottom: 6rem;
     left: 1rem;
     right: 1rem;
     background: hsl(var(--background) / 0.8);
@@ -192,6 +196,7 @@
       opacity: 0;
       transform: scale(0.96) translateY(10px);
     }
+
     to {
       opacity: 1;
       transform: scale(1) translateY(0);
@@ -213,9 +218,12 @@
   }
 
   @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 1;
     }
+
     50% {
       opacity: 0.5;
     }
