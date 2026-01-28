@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   :root {
     --background: 210 20% 98%;
@@ -84,6 +82,9 @@
     --sidebar-border: 0 0% 15%;
     --sidebar-ring: 0 0% 80%;
   }
+  .theme {
+    --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+  }
 }
 
 @layer base {
@@ -149,8 +150,6 @@
     bottom: 6rem;
     left: 1rem;
     right: 1rem;
-    background: hsl(var(--background) / 0.8);
-    backdrop-filter: blur(12px);
   }
 
   @media (min-width: 768px) {
@@ -232,5 +231,25 @@
   .subtle-pattern {
     background-image: radial-gradient(hsl(var(--muted-foreground) / 0.03) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@theme inline {
+  @keyframes blink-cursor {
+  0%, 49% {
+    opacity: 1;
+    }
+  50%, 100% {
+    opacity: 0;
+    }
   }
 }

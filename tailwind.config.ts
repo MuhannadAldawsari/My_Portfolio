@@ -1,4 +1,16 @@
 import type { Config } from "tailwindcss";
+//@ts-ignore
+import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette'
+import svgToDataUri from 'mini-svg-data-uri'
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme('colors'))
+  let newVars = Object.fromEntries(Object.entries(allColors).map(([key, val]) => [`--${key}`, val]))
+
+  addBase({
+    ':root': newVars
+  })
+}
 
 export default {
   darkMode: ["class"],
@@ -61,6 +73,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        filter: {
+          "blur-20": "blur(20px)",
+          "blur-25": "blur(25px)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,12 +92,44 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        moveUp: {
+          '0%': { transform: 'translateY(5%)', opacity: '0' },
+          '100%': { transform: 'translateY(55%)', opacity: '1' }
+        },
+        appear: {
+          from: { opacity: '0' },
+          to: { opacity: '1' }
+        },
+        "pop-blob": {
+          "0%": { transform: "scale(1)" },
+          "33%": { transform: "scale(1.2)" },
+          "66%": { transform: "scale(0.8)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        moveUp: 'moveUp 1.4s ease forwards',
+        appear: 'appear 1s 1s forwards',
+        "pop-blob": "pop-blob 5s infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    addVariablesForColors,
+    function ({ matchUtilities, theme, addUtilities }: any) {
+      matchUtilities(
+        {
+          'bg-grid': (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`
+          })
+        },
+        { values: flattenColorPalette(theme('backgroundColor')), type: 'color' }
+      )
+    }
+  ],
 } satisfies Config;
