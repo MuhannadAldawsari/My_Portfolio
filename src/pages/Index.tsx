@@ -6,7 +6,7 @@ import { SectionOverlay } from "@/components/SectionOverlay";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { Lights } from "@/components/animata/background/lights";
+import { Lights } from "@/components/animata/background/Lights";
 
 type NavSection = "home" | "about" | "projects" | "contact";
 
