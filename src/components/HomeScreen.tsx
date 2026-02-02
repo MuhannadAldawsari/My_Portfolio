@@ -59,7 +59,6 @@ export const HomeScreen = ({ onTypingComplete, hasPlayedAnimation = false }: Hom
               className="font-mono text-base md:text-lg leading-normal"
               duration={35}
               loop={false}
-              showCursor={true}
               onComplete={onTypingComplete}
             >
               Software Engineer & Full-Stack Developer
