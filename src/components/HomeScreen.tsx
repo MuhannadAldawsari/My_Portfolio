@@ -24,7 +24,7 @@ export const HomeScreen = ({ onTypingComplete, hasPlayedAnimation = false }: Hom
         <h1 className="font-display text-4xl md:text-5xl lg:text-5xl font-medium tracking-tight">
           {hasPlayedAnimation ? (
             <>
-              Hello, I'm <span className="text-accent">Muhannad Aldawsari</span>
+              Hello, I'm <span className="text-blue-900 dark:text-accent">Muhannad Aldawsari</span>
             </>
           ) : (
             <>
@@ -38,7 +38,7 @@ export const HomeScreen = ({ onTypingComplete, hasPlayedAnimation = false }: Hom
                 Hello, I'm
               </TypingAnimation>{" "}
               <TypingAnimation
-                className="font-display text-4xl md:text-5xl lg:text-5xl font-medium tracking-tight inline text-accent"
+                className="font-display text-4xl md:text-5xl lg:text-5xl font-medium tracking-tight inline text-blue-900 dark:text-accent"
                 duration={40}
                 delay={1000}
                 loop={false}
