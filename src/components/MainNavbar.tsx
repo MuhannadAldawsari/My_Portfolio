@@ -1,6 +1,6 @@
 import { Home, BookOpen, FolderKanban, Mail } from "lucide-react";
 
-type NavSection = "home" | "about" | "projects" | "contact";
+type NavSection = "home" | "education" | "projects" | "contact";
 
 interface GameNavProps {
   activeSection: NavSection;
@@ -9,7 +9,7 @@ interface GameNavProps {
 
 const navItems = [
   { id: "home" as const, label: "Home", icon: Home },
-  { id: "about" as const, label: "About", icon: BookOpen },
+  { id: "education" as const, label: "Education", icon: BookOpen },
   { id: "projects" as const, label: "Projects", icon: FolderKanban },
   { id: "contact" as const, label: "Contact", icon: Mail },
 ];

@@ -15,7 +15,7 @@ export const HomeScreen = ({ onTypingComplete, hasPlayedAnimation = false }: Hom
       {/* Avatar */}
       <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-border flex items-center justify-center">
         <span className="font-display text-4xl text-primary">
-          D
+          M
         </span>
       </div>
 

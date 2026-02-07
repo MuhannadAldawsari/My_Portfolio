@@ -1,4 +1,4 @@
-import { Award, Calendar, ExternalLink, X } from "lucide-react";
+import { Award, Calendar, ExternalLink, X, GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 const certificates = [
@@ -39,14 +39,48 @@ export const AboutSection = () => {
 
   return (
     <div className="space-y-8">
-      {/* Bio */}
+      {/* Education */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-foreground">
-          About Me
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+          <GraduationCap className="w-5 h-5 text-accent" />
+          Education
         </h3>
-        <p className="text-muted-foreground leading-relaxed">
-          A passionate developer with over 5 years of experience in building scalable web applications. I specialize in modern JavaScript frameworks and have a keen eye for creating intuitive user experiences. When I'm not coding, you'll find me exploring new technologies or contributing to open-source projects.
-        </p>
+        <div className="elegant-card p-6">
+          <div className="flex flex-col md:flex-row items-start gap-4">
+            <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-xl overflow-hidden bg-white/10 border border-border flex items-center justify-center">
+              <img
+                src="/university-logo.png"
+                alt="KSU Logo"
+                className="w-full h-full object-contain p-2"
+                onError={(e) => {
+                  e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='transparent' width='100' height='100'/%3E%3Ctext fill='%23999' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-size='10'%3ELogo%3C/text%3E%3C/svg%3E";
+                }}
+              />
+            </div>
+
+            <div className="flex-1 w-full">
+              <div className="flex flex-col md:flex-row justify-between md:items-start gap-2">
+                <div>
+                  <h4 className="text-xl font-medium text-foreground">
+                    Bachelor's in Software Engineering
+                  </h4>
+                  <p className="text-primary/80 font-medium mt-1">
+                    King Saud University (KSU)
+                  </p>
+                </div>
+                <div className="text-left md:text-right flex flex-col items-start md:items-end gap-1">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground">
+                    2022 - Present
+                  </span>
+                  <div className="mt-2 text-sm font-medium">
+                    <span className="text-muted-foreground">GPA: </span>
+                    <span className="text-accent">4.77 / 5.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Certificates */}

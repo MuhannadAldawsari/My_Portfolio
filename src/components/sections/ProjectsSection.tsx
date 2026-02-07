@@ -1,4 +1,4 @@
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, FolderKanban } from "lucide-react";
 
 const projects = [
   {
@@ -16,6 +16,13 @@ const projects = [
     featured: false,
   },
   {
+    title: "Sabbih Mobile App – Flutter Application",
+    description: "Developed Sabbih, a mobile -based application as part of an Application Development Camp, designed to help users read Azkar and stay consistent through reminder notifications. Focused on building a simple, user-friendly interface and reliable notification functionality to support daily spiritual practices.",
+    tags: ["Flutter"],
+    image: "/placeholder.svg",
+    featured: false,
+  },
+  {
     title: "SRS Document for Payroll Management System",
     description: "Developed a full SRS document following IEEE standards for a Payroll Management System as part of Requirements Engineering course. Defined functional and non-functional requirements, created use case diagrams and detailed use case descriptions, and modeled the system using sequence diagrams, activity diagrams, and class diagrams. Focused on requirements analysis, system scope definition, and stakeholder needs.",
     tags: ["Requirements Engineering Tools"],
@@ -27,9 +34,10 @@ const projects = [
 export const ProjectsSection = () => {
   return (
     <div className="space-y-6">
-      <p className="text-muted-foreground">
-        Selected projects from my portfolio.
-      </p>
+      <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+        <FolderKanban className="w-5 h-5 text-accent" />
+        Selected Projects From My Portfolio
+      </h3>
 
       <div className="grid gap-4">
         {projects.map((project, index) => (

@@ -8,7 +8,7 @@ import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Lights } from "@/components/animata/background/Lights";
 
-type NavSection = "home" | "about" | "projects" | "contact";
+type NavSection = "home" | "education" | "projects" | "contact";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState<NavSection>("home");
@@ -54,9 +54,9 @@ const Index = () => {
 
       {/* Other Section Overlays */}
       <SectionOverlay
-        isOpen={activeSection === "about"}
+        isOpen={activeSection === "education"}
         onClose={closeOverlay}
-        title="About & Certifications"
+        title="Education & Certifications"
       >
         <AboutSection />
       </SectionOverlay>
