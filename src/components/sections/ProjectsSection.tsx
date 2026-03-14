@@ -1,35 +1,64 @@
-import { Github, ExternalLink, FolderKanban } from "lucide-react";
+import { Github, ExternalLink, FolderKanban, HardDrive } from "lucide-react";
 
 const projects = [
   {
     title: "Murshid Platform – Career Guidance Web Application",
-    description: "Developed a web platform designed to help high school students identify suitable university majors through intelligent questionnaires that analyze students’ answers using AI-based decision logic. The platform highlights students’ strengths and interests, provides access to university and major information, and includes a community space where students can share experiences and insights.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Spring Boot", "PostgreSQL", "Trello",],
-    image: "/placeholder.svg",
-    featured: true,
+    description: "A web platform designed to help high school students identify suitable university majors through intelligent questionnaires that analyze students' answers using AI-based decision logic. The platform provide access to university and major information, and a community space where students can share experiences.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Spring Boot", "PostgreSQL", "Trello"],
+    image: "/murshid.svg",
+    status: "completed" as const,
+    url: "https://murshid-vrtb.vercel.app/",
+    linkType: "external" as const,
   },
   {
-    title: "Mobile Posts Platform – Flutter Application",
-    description: "Built a Flutter-based mobile posts platform utilizing Firebase and Supabase for authentication, data storage, and backend services. Implemented features including user login, post creation and deletion, image sharing, bookmarking, and real-time viewing of user engagement. Developed as part of an Application Development Camp, emphasizing mobile UI/UX and backend integration.",
+    title: "Library Management System",
+    description: "This project aims to develop a simple Library Management System that allows users to browse books and either purchase or rent them through a web application. The system is built using Laravel as a backend RESTful API and React for the frontend interface.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Laravel", "MySQL", "Git"],
+    image: "/library6.png",
+    status: "completed" as const,
+    url: "https://github.com/MuhannadAldawsari/Library-Management-Project",
+    linkType: "github" as const,
+  },
+  {
+    title: "Mobile Posts Platform",
+    description: "Built a Flutter-based mobile posts platform utilizing Firebase and Supabase for authentication, data storage, and backend services. Implemented features including user login, post creation and deletion, image sharing, bookmarking, and real-time viewing of user engagement.",
     tags: ["Flutter", "Dart", "Firebase", "Supabase"],
-    image: "/placeholder.svg",
-    featured: false,
+    image: "/posts.png",
+    status: "completed" as const,
+    url: null,
+    linkType: "github" as const,
   },
   {
-    title: "Sabbih Mobile App – Flutter Application",
-    description: "Developed Sabbih, a mobile -based application as part of an Application Development Camp, designed to help users read Azkar and stay consistent through reminder notifications. Focused on building a simple, user-friendly interface and reliable notification functionality to support daily spiritual practices.",
+    title: "Sabbih Mobile App",
+    description: "Sabbih, a mobile-based application as part of an Application Development Camp, designed to help users read Azkar and stay consistent through reminder notifications. Focused on building a simple, user-friendly interface and reliable notification functionality to support daily spiritual practices.",
     tags: ["Flutter"],
-    image: "/placeholder.svg",
-    featured: false,
+    image: "/sabbih4.png",
+    status: "in-progress" as const,
+    url: "https://github.com/muhanad0000/Sabbih-Mobile-App",
+    linkType: "github" as const,
   },
   {
     title: "SRS Document for Payroll Management System",
-    description: "Developed a full SRS document following IEEE standards for a Payroll Management System as part of Requirements Engineering course. Defined functional and non-functional requirements, created use case diagrams and detailed use case descriptions, and modeled the system using sequence diagrams, activity diagrams, and class diagrams. Focused on requirements analysis, system scope definition, and stakeholder needs.",
+    description: "Developed a full SRS document following IEEE standards as part of Requirements Engineering course. Defined functional and non-functional requirements, created use case diagrams and use case descriptions, and modeled the system using sequence diagrams, activity diagrams, and class diagrams.",
     tags: ["Requirements Engineering Tools"],
-    image: "/placeholder.svg",
-    featured: false,
+    image: "/SRS.png",
+    status: "completed" as const,
+    url: "https://drive.google.com/file/d/19263486-1012-4141-8181-818181818181/view?usp=sharing",
+    linkType: "drive" as const,
   },
 ];
+
+const getLinkIcon = (type: "external" | "github" | "drive") => {
+  if (type === "github") return <Github className="w-3.5 h-3.5" />;
+  if (type === "drive") return <HardDrive className="w-3.5 h-3.5" />;
+  return <ExternalLink className="w-3.5 h-3.5" />;
+};
+
+const getLinkTitle = (type: "external" | "github" | "drive") => {
+  if (type === "github") return "View on GitHub";
+  if (type === "drive") return "View on Google Drive";
+  return "Visit project";
+};
 
 export const ProjectsSection = () => {
   return (
@@ -43,7 +72,7 @@ export const ProjectsSection = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="project-card cursor-pointer group overflow-hidden p-0"
+            className="project-card cursor-pointer group overflow-hidden p-0 relative"
           >
             <div className="flex flex-col md:flex-row">
               {/* Image Section - Compact */}
@@ -58,9 +87,19 @@ export const ProjectsSection = () => {
                 </div>
               </div>
 
+              {/* Status Badge — top-right corner */}
+              <span
+                className={`absolute top-3 right-3 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${project.status === "completed"
+                  ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                  : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                  }`}
+              >
+                {project.status === "completed" ? "Completed" : "In Progress"}
+              </span>
+
               {/* Content Section - Compact */}
               <div className="flex-1 flex flex-col p-4">
-                <div className="flex items-start justify-between mb-2">
+                <div className="mb-2">
                   <h4 className="font-semibold text-foreground text-base group-hover:text-primary transition-colors line-clamp-1">
                     {project.title}
                   </h4>
@@ -88,12 +127,18 @@ export const ProjectsSection = () => {
                   </div>
 
                   <div className="flex gap-2 ml-2 shrink-0">
-                    <button className="p-1.5 rounded-full hover:bg-secondary transition-colors text-muted-foreground hover:text-primary">
-                      <Github className="w-3.5 h-3.5" />
-                    </button>
-                    <button className="p-1.5 rounded-full hover:bg-secondary transition-colors text-muted-foreground hover:text-primary">
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </button>
+                    {project.url && (
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-1.5 rounded-full hover:bg-secondary transition-colors text-muted-foreground hover:text-primary"
+                        title={getLinkTitle(project.linkType)}
+                      >
+                        {getLinkIcon(project.linkType)}
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

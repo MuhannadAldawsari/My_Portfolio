@@ -1,4 +1,4 @@
-import { Award, Calendar, ExternalLink, X, GraduationCap } from "lucide-react";
+import { Award, Calendar, ExternalLink, X, GraduationCap, Download } from "lucide-react";
 import { useState } from "react";
 
 const certificates = [
@@ -7,32 +7,39 @@ const certificates = [
     issuer: "IBM",
     date: "2026",
     badge: "Specialization",
-    certificateImage: "/certificates/fullstack-ibm.jpg",
+    certificatePdf: "/FSD.pdf",
   },
   {
-    title: "Application development camp",
+    title: "Backend Development Camp",
+    issuer: "Hash Plus",
+    date: "2026",
+    badge: "Certified",
+    certificatePdf: "/BDC.pdf",
+  },
+  {
+    title: "Application Development Camp",
     issuer: "Hash Plus",
     date: "2025",
     badge: "Certified",
-    certificateImage: "/certificates/cloud-aws.jpg",
+    certificatePdf: "/ADC.pdf",
   },
   {
     title: "IBM Data Science",
     issuer: "IBM",
     date: "2025",
     badge: "Completed",
-    certificateImage: "/certificates/ibm-data-science.jpg",
+    certificatePdf: "/Data Science.pdf",
   },
   {
     title: "Google IT Automation With Python",
     issuer: "Google",
     date: "2024",
     badge: "Completed",
-    certificateImage: "/certificates/python-google.jpg",
+    certificatePdf: "/Google IT.pdf",
   },
 ];
 
-const skills = ["React", "TypeScript", "Node.js", "Express.js", "Python", "Docker", "Tailwind CSS", "Flutter", "Firebase", "Databases", "SQL", "Git", "GitHub"];
+
 
 export const AboutSection = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<typeof certificates[0] | null>(null);
@@ -49,9 +56,9 @@ export const AboutSection = () => {
           <div className="flex flex-col md:flex-row items-start gap-4">
             <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-xl overflow-hidden bg-white/10 border border-border flex items-center justify-center">
               <img
-                src="/university-logo.png"
+                src="/KSU.png"
                 alt="KSU Logo"
-                className="w-full h-full object-contain p-2"
+                className="w-full h-full object-contain"
                 onError={(e) => {
                   e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='transparent' width='100' height='100'/%3E%3Ctext fill='%23999' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-size='10'%3ELogo%3C/text%3E%3C/svg%3E";
                 }}
@@ -119,65 +126,47 @@ export const AboutSection = () => {
         </div>
       </div>
 
-      {/* Skills */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-foreground">
-          Skills & Technologies
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              className="px-3 py-1.5 text-sm bg-secondary text-secondary-foreground rounded-full"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* Certificate Modal */}
       {selectedCertificate && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/75 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
           onClick={() => setSelectedCertificate(null)}
         >
           <div
-            className="elegant-card p-6 max-w-2xl w-full max-h-[90vh] overflow-auto relative animate-in zoom-in-95 duration-200"
+            className="relative w-full max-w-4xl h-[85vh] bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedCertificate(null)}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-secondary transition-colors"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5 text-muted-foreground hover:text-accent transition-colors" />
-            </button>
-
-            {/* Certificate Content */}
-            <div className="space-y-4">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-5 py-3 border-b border-border shrink-0">
               <div>
-                <h2 className="text-2xl font-semibold text-foreground">
-                  {selectedCertificate.title}
-                </h2>
-                <p className="text-muted-foreground mt-1">
-                  {selectedCertificate.issuer} • {selectedCertificate.date}
-                </p>
+                <span className="font-medium text-sm text-foreground">{selectedCertificate.title}</span>
+                <span className="text-muted-foreground text-xs ml-2">{selectedCertificate.issuer} • {selectedCertificate.date}</span>
               </div>
-
-              {/* Certificate Image */}
-              <div className="rounded-lg overflow-hidden bg-secondary/50 flex items-center justify-center min-h-[300px]">
-                <img
-                  src={selectedCertificate.certificateImage}
-                  alt={`${selectedCertificate.title} certificate`}
-                  className="w-full h-auto object-contain"
-                  onError={(e) => {
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23ddd' width='400' height='300'/%3E%3Ctext fill='%23999' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='sans-serif' font-size='18'%3ECertificate Image%3C/text%3E%3C/svg%3E";
-                  }}
-                />
+              <div className="flex items-center gap-2">
+                <a
+                  href={selectedCertificate.certificatePdf}
+                  download
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  <Download className="w-3 h-3" />
+                  Download
+                </a>
+                <button
+                  onClick={() => setSelectedCertificate(null)}
+                  className="p-1.5 rounded-full hover:bg-secondary transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="w-4 h-4 text-muted-foreground" />
+                </button>
               </div>
             </div>
+            {/* PDF Viewer */}
+            <iframe
+              src={selectedCertificate.certificatePdf}
+              title={selectedCertificate.title}
+              className="flex-1 w-full"
+            />
           </div>
         </div>
       )}

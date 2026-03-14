@@ -3,7 +3,7 @@ import { Mail, Github, Linkedin, X, MapPin, Phone } from "lucide-react";
 interface ContactSectionProps { }
 
 const socialLinks = [
-  { icon: Github, label: "GitHub", href: "https://github.com/MuhannadAldawsari", username: "Muhannad Aldawsari" },
+  { icon: Github, label: "GitHub", href: "https://github.com/MuhannadAldawsari", username: "MuhannadAldawsari" },
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/muhannad-aldawsari", username: "Muhannad Aldawsari" },
   { icon: X, label: "X", href: "https://x.com/Muhand773", username: "@Muhand773" },
 ];

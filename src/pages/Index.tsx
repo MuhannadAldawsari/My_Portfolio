@@ -6,6 +6,7 @@ import { SectionOverlay } from "@/components/SectionOverlay";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { ProfileSidebar } from "@/components/ProfileSidebar";
 import { Lights } from "@/components/animata/background/Lights";
 
 type NavSection = "home" | "education" | "projects" | "contact";
@@ -28,6 +29,8 @@ const Index = () => {
     setHasPlayedAnimation(true);
   };
 
+  const showSidebar = activeSection !== "home";
+
   return (
     <div className="fixed inset-0 bg-background subtle-pattern overflow-hidden">
       {/* Global Background Lights */}
@@ -39,6 +42,9 @@ const Index = () => {
 
       {/* Page Navigation - Bottom */}
       <GameNav activeSection={activeSection} onNavigate={handleNavigate} />
+
+      {/* Profile Sidebar — visible on all non-home sections */}
+      {showSidebar && <ProfileSidebar />}
 
       {/* Home Section */}
       <SectionOverlay
@@ -57,6 +63,7 @@ const Index = () => {
         isOpen={activeSection === "education"}
         onClose={closeOverlay}
         title="Education & Certifications"
+        withSidebar={showSidebar}
       >
         <AboutSection />
       </SectionOverlay>
@@ -65,6 +72,7 @@ const Index = () => {
         isOpen={activeSection === "projects"}
         onClose={closeOverlay}
         title="Projects"
+        withSidebar={showSidebar}
       >
         <ProjectsSection />
       </SectionOverlay>
@@ -73,6 +81,7 @@ const Index = () => {
         isOpen={activeSection === "contact"}
         onClose={closeOverlay}
         title="Contact"
+        withSidebar={showSidebar}
       >
         <ContactSection />
       </SectionOverlay>

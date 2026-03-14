@@ -6,9 +6,10 @@ interface SectionOverlayProps {
   onClose: () => void;
   title: string;
   children: ReactNode;
+  withSidebar?: boolean;
 }
 
-export const SectionOverlay = ({ isOpen, onClose, title, children }: SectionOverlayProps) => {
+export const SectionOverlay = ({ isOpen, onClose, title, children, withSidebar = false }: SectionOverlayProps) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export const SectionOverlay = ({ isOpen, onClose, title, children }: SectionOver
   if (!isOpen) return null;
 
   return (
-    <div className="overlay-panel" onClick={onClose}>
+    <div className={`overlay-panel${withSidebar ? ' overlay-panel--with-sidebar' : ''}`} onClick={onClose}>
       <div className="panel-content" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
         <div className="flex items-center justify-between p-5 md:p-6 border-b border-border">

@@ -22,7 +22,7 @@
     --muted: 210 15% 95%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 25 95% 53%;
+    --accent: 215 75% 38%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -157,6 +157,48 @@
     .overlay-panel {
       left: 2rem;
       right: 2rem;
+    }
+  }
+
+  /* Sidebar panel — hidden on mobile, visible on md+ */
+  .sidebar-panel {
+    display: none;
+    position: fixed;
+    top: 2rem;
+    bottom: 6rem;
+    left: 1rem;
+    width: 260px;
+    z-index: 50;
+    overflow-y: auto;
+    @apply bg-card border border-border rounded-2xl shadow-xl;
+    padding: 1.5rem 1.25rem;
+    animation: sidebarEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
+  }
+
+  @media (min-width: 768px) {
+    .sidebar-panel {
+      display: block;
+    }
+  }
+
+  @keyframes sidebarEnter {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Overlay shifted right when sidebar is visible — only on md+ */
+  @media (min-width: 768px) {
+    .overlay-panel--with-sidebar {
+      left: calc(1rem + 260px + 1rem);
     }
   }
 
