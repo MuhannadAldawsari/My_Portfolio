@@ -1,9 +1,28 @@
-import { useState } from "react";
-import { FileText, Download, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Download, X, FileText } from "lucide-react";
 import { skills } from "@/components/HomeScreen";
+import LEDBoard from "@/components/animata/card/led-board";
+import { TypingAnimation } from "@/components/animata/text/typing-animation";
 
-export const ProfileSidebar = () => {
+interface ProfileSidebarProps {
+    onTypingComplete?: () => void;
+    hasPlayedAnimation?: boolean;
+}
+
+export const ProfileSidebar = ({ onTypingComplete, hasPlayedAnimation = false }: ProfileSidebarProps) => {
     const [showResumeModal, setShowResumeModal] = useState(false);
+    const [nameTypingDone, setNameTypingDone] = useState(hasPlayedAnimation);
+
+    useEffect(() => {
+        if (hasPlayedAnimation) {
+            setNameTypingDone(true);
+        }
+    }, [hasPlayedAnimation]);
+
+    const handleNameComplete = () => {
+        setNameTypingDone(true);
+        onTypingComplete?.();
+    };
 
     return (
         <>
@@ -20,12 +39,36 @@ export const ProfileSidebar = () => {
 
                 {/* Name & Subtitle */}
                 <div className="text-center mb-4">
-                    <h2 className="font-display text-base font-semibold text-foreground leading-tight">
-                        Muhannad Aldawsari
+                    <h2 className="font-display text-base font-semibold text-foreground leading-tight min-h-[1.5em]">
+                        {hasPlayedAnimation ? (
+                            "Muhannad Aldawsari"
+                        ) : (
+                            <TypingAnimation
+                                className="font-display text-base font-semibold text-foreground"
+                                duration={60}
+                                delay={300}
+                                loop={false}
+                                startOnView={false}
+                                showCursor={true}
+                                onComplete={handleNameComplete}
+                            >
+                                Muhannad Aldawsari
+                            </TypingAnimation>
+                        )}
                     </h2>
-                    <p className="text-xs text-muted-foreground mt-1 font-mono leading-snug">
-                        Software Engineer &amp; Full-Stack Developer
-                    </p>
+                    {nameTypingDone ? (
+                        <TypingAnimation
+                            words={["Software Engineer", "Full-Stack Developer", "Backend Engineer"]}
+                            className="text-xs text-muted-foreground mt-1 font-mono leading-snug"
+                            duration={60}
+                            deleteSpeed={30}
+                            pauseDelay={1500}
+                            loop={true}
+                            startOnView={false}
+                            showCursor={true}
+                            blinkCursor={true}
+                        />
+                    ) : null}
                 </div>
 
                 {/* Review My Resume button */}
@@ -56,6 +99,14 @@ export const ProfileSidebar = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* Divider */}
+                <div className="border-t border-border mt-4 mb-3" />
+
+                {/* LED Board */}
+                <div className="space-y-1.5 hidden dark:block">
+                    <LEDBoard word="WELCOME" />
+                </div>
             </aside>
 
             {/* Resume Modal */}
@@ -68,7 +119,6 @@ export const ProfileSidebar = () => {
                         className="relative w-full max-w-4xl h-[85vh] bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Modal Header */}
                         <div className="flex items-center justify-between px-5 py-3 border-b border-border shrink-0">
                             <span className="font-medium text-sm text-foreground">
                                 Resume — Muhannad Aldawsari
@@ -91,15 +141,11 @@ export const ProfileSidebar = () => {
                                 </button>
                             </div>
                         </div>
-                        {/* PDF Viewer */}
-                        <iframe
-                            src="/resume.pdf"
-                            title="Resume"
-                            className="flex-1 w-full"
-                        />
+                        <iframe src="/resume.pdf" title="Resume" className="flex-1 w-full" />
                     </div>
                 </div>
             )}
         </>
     );
 };
+

@@ -1,4 +1,4 @@
-import { Home, BookOpen, FolderKanban, Mail } from "lucide-react";
+import { User2, BookOpen, FolderKanban, Mail } from "lucide-react";
 
 type NavSection = "home" | "education" | "projects" | "contact";
 
@@ -8,11 +8,12 @@ interface GameNavProps {
 }
 
 const navItems = [
-  { id: "home" as const, label: "Home", icon: Home },
+  { id: "home" as const, label: "About", icon: User2 },
   { id: "education" as const, label: "Education", icon: BookOpen },
   { id: "projects" as const, label: "Projects", icon: FolderKanban },
   { id: "contact" as const, label: "Contact", icon: Mail },
 ];
+
 
 export const GameNav = ({ activeSection, onNavigate }: GameNavProps) => {
   return (

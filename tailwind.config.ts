@@ -84,6 +84,11 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        led: {
+          "0%": { fill: "currentColor", brightness: "1" },
+          "50%": { fill: "hsl(var(--led-color))", brightness: "500%" },
+          "100%": { fill: "currentColor", brightness: "1" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -108,6 +113,7 @@ export default {
         },
       },
       animation: {
+        led: "led 100ms ease-in-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         moveUp: 'moveUp 1.4s ease forwards',

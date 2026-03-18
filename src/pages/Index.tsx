@@ -29,7 +29,7 @@ const Index = () => {
     setHasPlayedAnimation(true);
   };
 
-  const showSidebar = activeSection !== "home";
+  const showSidebar = true;
 
   return (
     <div className="fixed inset-0 bg-background subtle-pattern overflow-hidden">
@@ -43,14 +43,18 @@ const Index = () => {
       {/* Page Navigation - Bottom */}
       <GameNav activeSection={activeSection} onNavigate={handleNavigate} />
 
-      {/* Profile Sidebar — visible on all non-home sections */}
-      {showSidebar && <ProfileSidebar />}
+      {/* Profile Sidebar — always visible */}
+      <ProfileSidebar
+        onTypingComplete={handleAnimationComplete}
+        hasPlayedAnimation={hasPlayedAnimation}
+      />
 
       {/* Home Section */}
       <SectionOverlay
         isOpen={activeSection === "home"}
         onClose={closeOverlay}
-        title="Home"
+        title="About"
+        withSidebar={showSidebar}
       >
         <HomeScreen
           onTypingComplete={handleAnimationComplete}

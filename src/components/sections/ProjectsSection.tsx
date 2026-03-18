@@ -2,7 +2,7 @@ import { Github, ExternalLink, FolderKanban, HardDrive } from "lucide-react";
 
 const projects = [
   {
-    title: "Murshid Platform – Career Guidance Web Application",
+    title: "Murshid Platform",
     description: "A web platform designed to help high school students identify suitable university majors through intelligent questionnaires that analyze students' answers using AI-based decision logic. The platform provide access to university and major information, and a community space where students can share experiences.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Spring Boot", "PostgreSQL", "Trello"],
     image: "/murshid.svg",
@@ -34,7 +34,7 @@ const projects = [
     tags: ["Flutter"],
     image: "/sabbih4.png",
     status: "in-progress" as const,
-    url: "https://github.com/muhanad0000/Sabbih-Mobile-App",
+    url: null,
     linkType: "github" as const,
   },
   {
@@ -43,7 +43,7 @@ const projects = [
     tags: ["Requirements Engineering Tools"],
     image: "/SRS.png",
     status: "completed" as const,
-    url: "https://drive.google.com/file/d/19263486-1012-4141-8181-818181818181/view?usp=sharing",
+    url: "https://drive.google.com/drive/folders/1yeCGWVx2lIjW6t6iTErhaP5UQ75GFjiI?usp=sharing",
     linkType: "drive" as const,
   },
 ];
@@ -87,9 +87,9 @@ export const ProjectsSection = () => {
                 </div>
               </div>
 
-              {/* Status Badge — top-right corner */}
+              {/* Status Badge — top-right corner (desktop only) */}
               <span
-                className={`absolute top-3 right-3 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${project.status === "completed"
+                className={`hidden md:inline-flex absolute top-3 right-3 items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${project.status === "completed"
                   ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                   : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                   }`}
@@ -99,10 +99,20 @@ export const ProjectsSection = () => {
 
               {/* Content Section - Compact */}
               <div className="flex-1 flex flex-col p-4">
-                <div className="mb-2">
+                {/* Title row: name on left, badge on right (mobile only) */}
+                <div className="mb-2 flex items-center justify-between gap-2">
                   <h4 className="font-semibold text-foreground text-base group-hover:text-primary transition-colors line-clamp-1">
                     {project.title}
                   </h4>
+                  {/* Status badge — inline, mobile only */}
+                  <span
+                    className={`md:hidden shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${project.status === "completed"
+                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                      : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                    }`}
+                  >
+                    {project.status === "completed" ? "Completed" : "In Progress"}
+                  </span>
                 </div>
 
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
