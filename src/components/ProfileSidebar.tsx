@@ -61,6 +61,7 @@ export const ProfileSidebar = ({ onTypingComplete, hasPlayedAnimation = false }:
                             words={["Software Engineer", "Full-Stack Developer", "Backend Engineer"]}
                             className="text-xs text-muted-foreground mt-1 font-mono leading-snug"
                             duration={60}
+                            delay={500}
                             deleteSpeed={30}
                             pauseDelay={1500}
                             loop={true}
