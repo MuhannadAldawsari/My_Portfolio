@@ -18,7 +18,7 @@ export const ContactSection = ({ }: ContactSectionProps) => {
         </h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <a
-            href="mailto:Muhanad1214@hotmail.com"
+            href="mailto:m.aldawsari221@gmail.com"
             className="elegant-card p-4 flex items-center gap-3 hover:border-accent/30 transition-colors"
           >
             <div className="p-2.5 rounded-full bg-accent/10">
@@ -29,7 +29,7 @@ export const ContactSection = ({ }: ContactSectionProps) => {
                 Email
               </p>
               <p className="font-medium text-foreground">
-                Muhanad1214@hotmail.com
+                m.aldawsari221@gmail.com
               </p>
             </div>
           </a>

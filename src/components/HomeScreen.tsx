@@ -3,8 +3,8 @@ import { MobileSidebar } from "@/components/MobileSidebar";
 
 // skills exported so ProfileSidebar can still import them
 export const skills = [
-  "React", "TypeScript", "Node.js", "Laravel", "Python",
-  "Docker", "Tailwind CSS", "Flutter", "Firebase", "Databases", "SQL", "Git", "GitHub"
+  "Java", "Python", "React", "Flutter", "Tailwind CSS", "PHP", "Laravel",
+  "API Integration", "SQL", "Firebase", "Databases", "System Design", "GitHub", "Agile Methodology"
 ];
 
 const expertiseCards = [
