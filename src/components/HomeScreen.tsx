@@ -1,5 +1,6 @@
-import { Smartphone, Globe, Server, Brain, User, Target, Code2, Wrench } from "lucide-react";
+import { Smartphone, Globe, Server, Brain, User, Target, Code2, Wrench, Layers } from "lucide-react";
 import { MobileSidebar } from "@/components/MobileSidebar";
+import { TechMarquee } from "@/components/TechMarquee";
 
 // skills exported so ProfileSidebar can still import them
 export const skills = [
@@ -31,7 +32,7 @@ const expertiseCards = [
 ];
 
 const interests = [
-  "Software Engineering Internships",
+  "Software Engineering Opportunities",
   "Backend / Full-Stack Development Roles",
   "Cross-Platform Mobile Development Roles",
 ];
@@ -112,6 +113,15 @@ export const HomeScreen = ({ onTypingComplete, hasPlayedAnimation = false }: Hom
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Tech Stack Marquee */}
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+            <Layers className="w-5 h-5 text-accent" />
+            My Tech Stack
+          </h3>
+          <TechMarquee />
         </div>
 
         {/* Skills & Technologies — mobile only (shown here instead of sidebar card) */}
