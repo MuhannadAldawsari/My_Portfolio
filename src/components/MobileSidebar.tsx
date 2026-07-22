@@ -33,8 +33,8 @@ export const MobileSidebar = ({ onTypingComplete, hasPlayedAnimation = false }: 
             <div className="md:hidden rounded-2xl border border-border bg-card/80 p-4 space-y-4">
                 {/* Avatar + Name */}
                 <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 shrink-0 rounded-full overflow-hidden border-2 border-border shadow-md">
-                        <img src="/me2.png" alt="Muhannad Aldawsari" className="w-full h-full object-cover" />
+                    <div className="w-20 h-20 shrink-0 rounded-full overflow-hidden border-2 border-border shadow-md">
+                        <img src="/profile2.jpeg" alt="Muhannad Aldawsari" className="w-full h-full object-cover" />
                     </div>
                     <div>
                         <h2 className="font-display text-base font-semibold text-foreground leading-tight min-h-[1.5em]">

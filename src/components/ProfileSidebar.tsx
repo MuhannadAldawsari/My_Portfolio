@@ -29,11 +29,11 @@ export const ProfileSidebar = ({ onTypingComplete, hasPlayedAnimation = false }:
             {/* Sidebar */}
             <aside className="sidebar-panel">
                 {/* Avatar */}
-                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-border shadow-md mx-auto mb-3">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-border shadow-md mx-auto mb-3">
                     <img
-                        src="/me2.png"
+                        src="/profile2.jpeg"
                         alt="Muhannad Aldawsari"
-                        className="w-full h-full object-cover"
+                        className="w-32 h-32 object-cover"
                     />
                 </div>
 
